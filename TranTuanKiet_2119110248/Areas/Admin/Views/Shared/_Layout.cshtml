@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>AdminLTE 3 | Quản Trị</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,10 +25,15 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/summernote/summernote-bs4.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!---->
+   
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
+     
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="~/Areas/Admin/Content/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
@@ -42,10 +47,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">TRANG CHỦ</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="~/Home/Index" class="nav-link">TRANG NGƯỜI DÙNG</a>
                 </li>
             </ul>
 
@@ -187,7 +192,7 @@
                         <img src="~/Areas/Admin/Content/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">Trần Tuấn Kiệt</a>
                     </div>
                 </div>
 
@@ -207,26 +212,44 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
+                     with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                    DANH MỤC ADMIN
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <script>
+                                 function myFunction() {
+                                     var i = document.getElementById("myDIV");
+                                     i.classList.add("class", "mystyle")
+                                 }
+                                function myFunction1() {
+                                    var i = document.getElementById("myDIV1");
+                                    i.classList.add("class","mystyle")
+                                }
+                              
+                            </script>
+                            <style>
+                               .mystyle {
+                                   background-color:Red;
+                               }
+                            </style>
+                         
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
+                                <li class="nav-item" onclick="myFunction()" id="myDIV">
+                                    <a href="@Url.Action("Index","Product")" class="nav-link" >
+                                        @*active*@
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
+                                        <p>Quản Lý Sản Phẩm</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
+                                <li class="nav-item"  onclick="myFunction1()" id="myDIV1">
+                                    <a href="@Url.Action("Index","Brand")" class="nav-link" >
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
+                                        <p>Quản Lý Thương Hiệu</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -848,22 +871,23 @@
 
         <!-- Content Wrapper. Contains page content --><div class="content-wrapper">
 
-    @RenderBody()</div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0
+            @RenderBody()
         </div>
-    </footer>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.1.0
+            </div>
+        </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-</div>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/Areas/Admin/Content/plugins/jquery/jquery.min.js"></script>
@@ -899,5 +923,9 @@
     <script src="~/Areas/Admin/Content/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Areas/Admin/Content/dist/js/pages/dashboard.js"></script>
+
+
+
+    <script src="~/Areas/Admin/Content/pluginsbootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

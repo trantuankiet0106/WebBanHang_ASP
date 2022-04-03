@@ -1,8 +1,13 @@
-﻿@model List<TranTuanKiet_2119110248.Category>
+﻿@model List<TranTuanKiet_2119110248.Context.Category>
 @{
     ViewBag.Title = "Category";
 }
 <body>
+    <style>
+       .img-wrap{
+           
+        }
+    </style>
     <!-- ========================= SECTION CONTENT ========================= -->
     <section class="section-content padding-y">
         <div class="container">
@@ -15,7 +20,7 @@
                                 <img src="~/Content/images/Category/@item.avatar">
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title"><a href="#">@item.name</a></h4>
+                                <h4 class="card-title"><a href="@Url.Action("ProductCategoryList","Product",new { id = item.id })">@item.name</a></h4>
                                 <ul class="list-menu">
                                     <li><a href="">Leather jackets</a></li>
                                     <li><a href="">Men's jackets</a></li>
@@ -27,10 +32,7 @@
                         </div>
                     </div> <!-- col.// -->
                 }
-               
-               
-              
-                
+
             </nav> <!-- row.// -->
 
 

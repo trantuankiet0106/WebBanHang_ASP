@@ -7,17 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TranTuanKiet_2119110248
+namespace TranTuanKiet_2119110248.Context
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Brand
+    public partial class Slide
     {
-        public int BranID { get; set; }
-        public string BrandName { get; set; }
+        public int SlideID { get; set; }
         public string Avatar { get; set; }
-        public Nullable<bool> IsDelete { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Show { get; set; }
     }
 }
