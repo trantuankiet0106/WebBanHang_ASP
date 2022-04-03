@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TranTuanKiet_2119110248.Context;
 using TranTuanKiet_2119110248.Models;
 
 namespace TranTuanKiet_2119110248.Controllers

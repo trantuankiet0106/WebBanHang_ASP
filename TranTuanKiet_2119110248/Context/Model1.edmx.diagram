@@ -9,6 +9,11 @@
         <EntityTypeShape EntityType="WebbanhangModel.Product" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="WebbanhangModel.Brand" Width="1.5" PointX="2.375" PointY="4.625" />
         <EntityTypeShape EntityType="WebbanhangModel.User" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.Slide" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.Picture" Width="1.5" PointX="0.625" PointY="4.5" />
+        <EntityTypeShape EntityType="WebbanhangModel.Order" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.OrderDetail" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.sysdiagram" Width="1.5" PointX="7.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

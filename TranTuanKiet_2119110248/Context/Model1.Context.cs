@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TranTuanKiet_2119110248
+namespace TranTuanKiet_2119110248.Context
 {
     using System;
     using System.Data.Entity;
@@ -29,5 +29,10 @@ namespace TranTuanKiet_2119110248
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

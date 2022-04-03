@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TranTuanKiet_2119110248
+namespace TranTuanKiet_2119110248.Context
 {
     using System;
     using System.Collections.Generic;

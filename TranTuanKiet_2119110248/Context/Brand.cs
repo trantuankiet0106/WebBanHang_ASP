@@ -7,22 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TranTuanKiet_2119110248
+namespace TranTuanKiet_2119110248.Context
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Brand
     {
-        public int UserID { get; set; }
-        public string LastName { get; set; }
-        public string FistName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> sex { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
+        public int BranID { get; set; }
+        public string BrandName { get; set; }
+        public string Avatar { get; set; }
         public Nullable<bool> IsDelete { get; set; }
-        public Nullable<System.DateTime> CreaterDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }
