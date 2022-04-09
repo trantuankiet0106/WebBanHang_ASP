@@ -7,7 +7,7 @@
 
 <h1>QUẢN LÝ THƯƠNG HIỆU</h1>
 <p>
-    <a href="@Url.Action("Create", "Product")"><i class="fa-solid fa-circle-plus"></i>THÊM THƯƠNG HIỆU</a>
+    <a href="@Url.Action("Create", "Brand")"><i class="fa-solid fa-circle-plus"></i>THÊM THƯƠNG HIỆU</a>
 </p>
 <table class="table">
     <tr>
@@ -38,8 +38,7 @@
             @Html.DisplayFor(modelItem => item.BrandName)
         </td>
         <td>
-         
-            <img src="~/Areas/Admin/Content/images/Brand/@item.Avatar" class="img-fluid figure-img" style="height:50px"/>
+            <img src="~/Content/images/Brand/@item.Avatar" class="img-fluid figure-img" style="height:50px"/>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDelete)
@@ -48,9 +47,10 @@
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <a href="@Url.Action("Edit", "Brand", new { id=item.BranID })"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="@Url.Action("Details", "Brand", new {id=item.BranID })"><i class="fa-solid fa-circle-info"></i></a>
+            <a href="@Url.Action("Delete", "Brand", new { id=item.BranID})"><i class="fa-solid fa-trash-can"></i></a>
+
         </td>
     </tr>
 }

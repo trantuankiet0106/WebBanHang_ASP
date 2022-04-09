@@ -56,7 +56,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
                     string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
                     fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
                     objProduct.Avatar = fileName;
-                    objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), fileName));
+                    objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
                 }
                 webbanhang.Products.Add(objProduct);
                 webbanhang.SaveChanges();
@@ -107,7 +107,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
                 string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
                 fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
                 objProduct.Avatar = fileName;
-                objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), fileName));
+                objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
             }
             webbanhang.Entry(objProduct).State = EntityState.Modified;
             webbanhang.SaveChanges();

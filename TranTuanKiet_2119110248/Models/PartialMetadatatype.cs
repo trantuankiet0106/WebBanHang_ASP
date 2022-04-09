@@ -23,6 +23,11 @@ namespace TranTuanKiet_2119110248.Context
         [NotMapped]
         public HttpPostedFileBase ImageUpload { get; set; }
     }
+    [MetadataType(typeof(UserMasterData))]
+    public partial class User
+    {
+       
+    }
 
 
 }

@@ -14,9 +14,10 @@ namespace TranTuanKiet_2119110248.Context
     
     public partial class OrderDetail
     {
-        public int ID { get; set; }
-        public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int id { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public Nullable<int> ProductId { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public string ProductName { get; set; }
     }
 }

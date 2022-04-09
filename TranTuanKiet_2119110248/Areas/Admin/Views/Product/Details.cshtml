@@ -1,15 +1,15 @@
-﻿@model TranTuanKiet_2119110248.Product
+﻿@model TranTuanKiet_2119110248.Context.Product
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="margin-left:10px">Details</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4 style="margin-left:10px">Product</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="margin-left:10px">
         <dt>
             @Html.DisplayNameFor(model => model.ProductName)
         </dt>
@@ -71,7 +71,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FullDes)
+            @*@Html.DisplayFor(model => model.FullDes)*@
+            <div style="height:900px; overflow:hidden;">
+                @Html.Raw(Model.FullDes)
+            </div>
         </dd>
 
         <dt>

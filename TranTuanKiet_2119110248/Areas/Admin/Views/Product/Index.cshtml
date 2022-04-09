@@ -118,19 +118,24 @@
         }
 
 </style>
-<h1>QUẢN LÝ SẢN PHẨM</h1>
+<h1  style="margin-left:10px;">QUẢN LÝ SẢN PHẨM</h1>
 <p>
-    <a href="@Url.Action("Create", "Product")"><i class="fa-solid fa-circle-plus"></i>THÊM SẢN PHẨM</a>
+    <a href="@Url.Action("Create", "Product")"><i class="fa-solid fa-circle-plus" style="margin-left:10px;"></i>THÊM SẢN PHẨM</a>
    
     @using (Html.BeginForm("Index", "Product", FormMethod.Get))
             {
-                <p>
+                <div style="margin-left:10px; font-size:20px; font-weight:bold">
                     Tìm  sản phẩm : @Html.TextBox("searchString",ViewBag.CurrentFilter as string)
                     <input class="btn btn-primary" type="submit" value="Tìm Kiếm" />
-                </P>
+                </div>
             }
 </p>
-<table class="table">
+<style>
+    tr {
+        border:1px solid #999999;
+    }
+</style>
+<table class="table" style="margin-left:10px">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
@@ -168,6 +173,7 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().UpdateDate)
         </th>
+      
         <th></th>
     </tr>
 
@@ -218,7 +224,8 @@
         </td>
     </tr>
 }
-
 </table>
-Trang @(Model.PageCount< Model.PageNumber ? 0: Model.PageNumber)or @Model.PageCount
-@Html.PagedListPager(Model, Page => Url.Action("Index", new {Page,currentFilter =ViewBag.currentFilter }))
+<div style="margin-left:10px">
+    Trang @(Model.PageCount< Model.PageNumber ? 0: Model.PageNumber)or @Model.PageCount
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, currentFilter = ViewBag.currentFilter }))
+</div>

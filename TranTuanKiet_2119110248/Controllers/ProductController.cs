@@ -20,11 +20,12 @@ namespace TranTuanKiet_2119110248.Controllers
            
             homeModel.lstProduct = webbanhang.Products.ToList();
             var product = webbanhang.Products.Where(n => n.ProductId == id).FirstOrDefault();
-            //homeModel.lstProduct = product;
+           
             return View(product);
         }
-        public ActionResult ProductCategoryList(int id , int? page)
+        public ActionResult ProductCategoryList(int id )
         {
+
             ProductCategory productCat = new ProductCategory();
             var lstproductCat = webbanhang.Products.Where(n => n.CategoryId == id).ToList();
             var lstCategory = webbanhang.Categories.Where(n => n.id == id).ToList();
@@ -32,8 +33,6 @@ namespace TranTuanKiet_2119110248.Controllers
             productCat.id = id;
             productCat.listCategory = lstCategory;
             productCat.listProducts = lstproductCat;
-
-
             return View(productCat);
         }
         public ActionResult ProductCategorygrid(int id)
@@ -47,6 +46,7 @@ namespace TranTuanKiet_2119110248.Controllers
             productCat.listProducts = lstproductCat;
             return View(productCat);
         }
+       
 
     }
 }

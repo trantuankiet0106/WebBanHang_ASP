@@ -6,14 +6,16 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8a0dd9e352434963b3684de39919b48e" Name="Diagram1">
         <EntityTypeShape EntityType="WebbanhangModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebbanhangModel.Product" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="WebbanhangModel.Brand" Width="1.5" PointX="2.375" PointY="4.625" />
-        <EntityTypeShape EntityType="WebbanhangModel.User" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WebbanhangModel.Slide" Width="1.5" PointX="5.375" PointY="4.75" />
-        <EntityTypeShape EntityType="WebbanhangModel.Picture" Width="1.5" PointX="0.625" PointY="4.5" />
-        <EntityTypeShape EntityType="WebbanhangModel.Order" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="WebbanhangModel.OrderDetail" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="WebbanhangModel.sysdiagram" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.Product" Width="1.5" PointX="2.5" PointY="0.75" />
+        <EntityTypeShape EntityType="WebbanhangModel.Brand" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="WebbanhangModel.Slide" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="WebbanhangModel.Picture" Width="1.5" PointX="9.375" PointY="1.25" />
+        <EntityTypeShape EntityType="WebbanhangModel.sysdiagram" Width="1.5" PointX="8.75" PointY="4.125" />
+        <EntityTypeShape EntityType="WebbanhangModel.Order" Width="1.5" PointX="0.625" PointY="4.375" />
+        <EntityTypeShape EntityType="WebbanhangModel.OrderDetail" Width="1.5" PointX="6.5" PointY="3.5" />
+        <EntityTypeShape EntityType="WebbanhangModel.User" Width="1.5" PointX="4.375" PointY="0.875" />
+        <EntityTypeShape EntityType="WebbanhangModel.AboutU" Width="1.5" PointX="2.25" PointY="4.5" />
+        <EntityTypeShape EntityType="WebbanhangModel.Contact" Width="1.5" PointX="3.75" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

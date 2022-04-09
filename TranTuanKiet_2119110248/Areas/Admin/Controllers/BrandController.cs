@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -36,7 +38,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
                     string extension = Path.GetExtension(objBrand.ImageUpload.FileName);
                     fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
                     objBrand.Avatar = fileName;
-                    objBrand.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), fileName));
+                    objBrand.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Brand"), fileName));
                 }
                 webbanhang.Brands.Add(objBrand);
                 webbanhang.SaveChanges();
@@ -52,9 +54,11 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var objProduct = webbanhang.Brands.Where(n => n.BranID == id).FirstOrDefault();
-            return View(objProduct);
+            var Brand = webbanhang.Brands.Where(n => n.BranID == id).FirstOrDefault();
+            return View(Brand);
         }
+    
+    
         //Delete
         [HttpGet]
 
@@ -64,20 +68,36 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
             return View(objBrand);
         }
         [HttpPost]
-        public ActionResult Delete(Brand objBran)
+        public ActionResult Delete(Brand objB)
         {
-            var objBrand = webbanhang.Products.Where(n => n.ProductId == objBran.BranID).FirstOrDefault();
-            webbanhang.Products.Remove(objBrand);
+            var objBrand = webbanhang.Brands.Where(n => n.BranID == objB.BranID).FirstOrDefault();
+            webbanhang.Brands.Remove(objBrand);
             webbanhang.SaveChanges();
             return RedirectToAction("Index");
         }
+
         //edit
         [HttpGet]
-        public ActionResult Edit(Product objBrand)
+        public ActionResult Edit(int id)
         {
-            var objProduct = webbanhang.Brands.Where(n => n.BranID == objBrand.BrandId).FirstOrDefault();
+            var objBrand = webbanhang.Brands.Where(n => n.BranID == id).FirstOrDefault();
 
-            return RedirectToAction("Index");
+            return View(objBrand);
+        }
+        [HttpPost]
+        public ActionResult Edit(Brand objB)
+        {
+            if (objB.ImageUpload != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(objB.ImageUpload.FileName);
+                string extension = Path.GetExtension(objB.ImageUpload.FileName);
+                fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
+                objB.Avatar = fileName;
+                objB.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Brand"), fileName));
+            }
+            webbanhang.Entry(objB).State = EntityState.Modified;
+            webbanhang.SaveChanges();
+            return View(objB);
         }
     }
 }

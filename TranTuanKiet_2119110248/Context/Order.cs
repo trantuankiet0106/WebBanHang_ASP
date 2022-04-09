@@ -14,10 +14,11 @@ namespace TranTuanKiet_2119110248.Context
     
     public partial class Order
     {
-        public int ID { get; set; }
-        public string UserID { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<System.DateTime> CreatedOnUtc { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<System.DateTime> CreatedOnUtc { get; set; }
+        public Nullable<int> Status { get; set; }
+        public string ProductName { get; set; }
     }
 }

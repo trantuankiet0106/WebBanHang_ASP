@@ -19,6 +19,7 @@ namespace TranTuanKiet_2119110248.Controllers
 
         {
 
+
             HomeModel homeModel = new HomeModel();
             homeModel.lstCategory = webbanhang.Categories.ToList();
             homeModel.lstProduct = webbanhang.Products.ToList();
@@ -56,11 +57,10 @@ namespace TranTuanKiet_2119110248.Controllers
                 {
                     ViewBag.error = "Email already exists";
                     return View();
-
                 }
+
+
             }
-
-
             return View();
         }
         public static string GetMD5(string str)
@@ -84,8 +84,6 @@ namespace TranTuanKiet_2119110248.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 var f_password = GetMD5(password);
                 var data = webbanhang.Users.Where(s => s.Email.Equals(email) && s.Password.Equals(f_password)).ToList();
                 if (data.Count() > 0)

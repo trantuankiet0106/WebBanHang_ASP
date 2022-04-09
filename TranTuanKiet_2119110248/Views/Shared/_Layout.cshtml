@@ -10,7 +10,7 @@
     <meta name="description" content="Bootstrap e-commerce html template similar to Alibaba">
     <meta name="keywords" content="Online template, shop, theme, template, html, css, bootstrap 4">
 
-    <title>Website title - bootstrap alistyle html template</title>
+    <title>Electronic Device</title>
 
     <link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!--font-->
@@ -36,6 +36,8 @@
 <body>
     <b class="screen-overlay"></b>
 
+    
+
     <header class="section-header">
         <section class="header-main border-bottom">
             <div class="container">
@@ -48,10 +50,10 @@
                     <div class="col-xl-6 col-lg-5 col-md-6">
                         <form action="#" class="search-header" style="list-style:none; margin-top:13px;">
                             <div class="input-group w-100">
-                            
-                                <input type="text" class="form-control" placeholder="Search">
 
-                                <div class="input-group-append" >
+                                <input type="text" class="form-control" placeholder="Search" name="searchString">
+
+                                <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search"></i> Tìm Kiếm
                                     </button>
@@ -68,31 +70,31 @@
                                 {
                                     if (Session["Admin"] != null)
                                     {
-                                        <li style="list-style:none" >
-                                            <a href="~/Admin/Home/Index" >
-                                                <i class="fa-solid fa-screwdriver-wrench"></i>ADMIN
-                                            </a>
-                                        </li>
+                    <li style="list-style:none">
+                        <a href="~/Admin/Home/Index">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>ADMIN
+                        </a>
+                    </li>
                                         <li style="list-style:none; margin-top:2px;">
                                             <a href="~/Home/Logout">
                                                 <i class="fa-solid fa-right-from-bracket">
-                                                </i>ĐĂNG XUẤT</a>
+                                                </i>ĐĂNG XUẤT
+                                            </a>
                                         </li> }
                                     else
                                     {
 
-                                    <li style="list-style:none; margin-top:2px;">
-                                        <a href="~/Home/Logout" >
-                                            <i class="fa-solid fa-right-from-bracket" >
-                                            </i>ĐĂNG XUẤT
-                                        </a>
-                                    </li> }
-                            }
-                            else
-                              {
-                        <li style="list-style:none"><a href="~/Home/Register"><i class="fa-solid fa-id-card"></i> ĐĂNG KÝ</a></li>
-                           <li style="list-style:none"><a href="@Url.Action("Login", "Home")"><i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP</a></li>
-                           }
+                    <li style="list-style:none; margin-top:2px;">
+                        <a href="~/Home/Logout">
+                            <i class="fa-solid fa-right-from-bracket">
+                            </i>ĐĂNG XUẤT
+                        </a>
+                    </li> }
+            }
+            else
+            {
+                <li style="list-style:none"><a href="~/Home/Register"><i class="fa-solid fa-id-card"></i> ĐĂNG KÝ</a></li>
+                <li style="list-style:none"><a href="@Url.Action("Login", "Home")"><i class="fa-solid fa-right-to-bracket "></i> ĐĂNG NHẬP</a></li>}
                             </div>
                             <div class="widget-header mr-3">
                                 <a href="#" class="widget-view">
@@ -123,7 +125,7 @@
                                 <a href="@Url.Action("Shoppingcart","Shoppingcart")" class="widget-view">
                                     <div class="icon-area">
                                         <i class="fa fa-shopping-cart"></i>
-                                         
+
 
                                         <span class="notify" id="CartCount">@Session["count"]</span>
                                     </div>
@@ -143,36 +145,34 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            <style>
+                .nav-link {
 
-                <div class="collapse navbar-collapse" id="main_nav">
+                    font-weight: bold;
+                }
+                .nav-item:hover .nav-link {
+                    color: azure !important;
+                }
+            </style>
+                <div class="collapse navbar-collapse" id="main_nav" style="background-color:#ff6a00 ; opacity:0.95; border-radius:5px; height:50px;">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bars text-muted mr-2"></i> TấT Cả Các Thương Hiệu </a>
-                            <div class="dropdown-menu dropdown-large">
-                                <nav class="row">
-
-                                    <div class="col-6">
-
-
-                                        <a href="page-profile-main.html">load danh mục lên đây</a>
-
-
-
-                                    </div>
-                                </nav> <!--  row end .// -->
-                            </div> <!--  dropdown-menu dropdown-large end.// -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Home")">TRANG CHỦ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Thương Hiệu</a>
+                            <a class="nav-link" href="@Url.Action("Promotion","Category")">KHUYẾN MÃI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Liên Hệ</a>
+                            <a class="nav-link" href="#">TUYỂN DỤNG</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Giới Thiệu</a>
+                            <a class="nav-link" href="#">TIN TỨC</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sản Phẩm Mới</a>
+                            <a class="nav-link" href="#">GIỚI THIỆU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LIÊN HỆ</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-md-auto">

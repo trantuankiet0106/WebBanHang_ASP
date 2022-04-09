@@ -1,4 +1,4 @@
-﻿@model TranTuanKiet_2119110248.Brand
+﻿@model TranTuanKiet_2119110248.Context.Brand
 
 @{
     ViewBag.Title = "Create";
@@ -15,13 +15,7 @@
         <h4>Brand</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.BranID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BranID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BranID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.BrandName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,8 +28,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    <input type="file" name="ImageUpload" />
+                </div>
             </div>
         </div>
 
