@@ -22,9 +22,9 @@
             @Html.DisplayNameFor(model => model.Avatar)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Avatar)
-        </dd>
+        <td>
+            <img src="~/Content/images/Product/@Model.Avatar" class="img-fluid figure-img" style="height:50px" />
+        </td>
 
         <dt>
             @Html.DisplayNameFor(model => model.ProductPrice)
@@ -56,6 +56,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.BrandId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeId)
         </dd>
 
         <dt>

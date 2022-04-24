@@ -1,4 +1,4 @@
-﻿
+﻿@model TranTuanKiet_2119110248.Models.MasterOder
     @{
         ViewBag.Title = "Index";
         Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -25,30 +25,22 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
+            <!-- Small boxes (Stat box) --> 
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            @{
+                                var sale = Model.ListOrderDetail.Sum(n => n.price);
+                            }
 
-                            <p>New Orders</p>
+
+                            <h3>@sale</h3>
+                            <p>Doanh số đã bán được</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -59,16 +51,37 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            @{ 
+                                var oder = Model.ListOrderDetail.Sum(n => n.Quantity);
+                            }
+                            <h3>@oder<sup style="font-size: 20px"></sup></h3>
+
+                            <p>Số Sản Phẩm Đã Bán</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Xem Chi Tiết<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            @{
+                                var oder2 = Model.ListOrderDetail.Count;
+                            }
+                            <h3>@oder2</h3>
 
-                            <p>User Registrations</p>
+                            <p>Tổng số đơn hàng</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("HOME","OrderManagement")" class="small-box-footer"> xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -76,14 +89,17 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            @{
+                                var user = Model.ListUser.Count;
+                            }
+                            <h3>@user</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>TỔNG SỐ NGƯỜI DÙNG</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Index","User")" class="small-box-footer"> xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

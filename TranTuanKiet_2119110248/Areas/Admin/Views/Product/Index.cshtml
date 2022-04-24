@@ -134,6 +134,9 @@
     tr {
         border:1px solid #999999;
     }
+    th{
+        text-overflow:clip; 
+    }
 </style>
 <table class="table" style="margin-left:10px">
     <tr>
@@ -156,6 +159,9 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().BrandId)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TypeId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().ShortDes)
         </th>
         <th>
@@ -173,56 +179,60 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().UpdateDate)
         </th>
-      
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            <img src="~/Content/images/Product/@item.Avatar" class="img-fluid figure-img" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceDiscount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullDes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", "Product", new { id=item.ProductId })"><i class="fa-solid fa-pen-to-square"></i></a>   
-            <a href="@Url.Action("Details", "Product", new {id=item.ProductId })"><i class="fa-solid fa-circle-info"></i></a>
-            <a href="@Url.Action("Delete", "Product", new { id=item.ProductId})"><i class="fa-solid fa-trash-can"></i></a>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        <img src="~/Content/images/Product/@item.Avatar" class="img-fluid figure-img" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductPrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PriceDiscount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoryId)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.BrandId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TypeId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShortDes)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FullDes)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsActive)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsDelete)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreateDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdateDate)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", "Product", new { id=item.ProductId })"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="@Url.Action("Details", "Product", new {id=item.ProductId })"><i class="fa-solid fa-circle-info"></i></a>
+        <a href="@Url.Action("Delete", "Product", new { id=item.ProductId})"><i class="fa-solid fa-trash-can"></i></a>
 
 
-        </td>
-    </tr>
+    </td>
+</tr>
 }
 </table>
 <div style="margin-left:10px">

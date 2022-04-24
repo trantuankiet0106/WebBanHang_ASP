@@ -1,9 +1,7 @@
 ﻿@model TranTuanKiet_2119110248.Models.ProductCategory
-@{ 
+@{
     ViewBag.Title = "ProductCategorygrid";
 }
-
-
 
 
 <!-- ========================= SECTION CONTENT ========================= -->
@@ -23,6 +21,7 @@
                     <option>Most Popular</option>
                     <option>Cheapest</option>
                 </select>
+
                 <div class="btn-group">
                     <a href="@Url.Action("ProductCategoryList","Product",new {id=Model.id})" class="btn btn-light active" data-toggle="tooltip" title="List view">
                         <i class="fa fa-bars"></i>
@@ -40,7 +39,7 @@
                 <div class="col-md-3">
                     <figure class="card card-product-grid">
                         <div class="img-wrap">
-                 
+
                             <a href="@Url.Action("Detail", "Product", new { id = item.ProductId })" class="img-wrap">
                                 <img src="~/Content/images/Product/@item.Avatar">
                             </a>
@@ -82,7 +81,12 @@
                                 </div>
                             </label>
 
-                            <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>
+                            <div class="form-group col-md">
+                                <a href="#" id="addtocart" class="btn  btn-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="text" h>Thêm vào giỏ hàng</span>
+                                </a>
+                            </div> <!-- col.// -->
 
                         </figcaption>
                     </figure>

@@ -4,7 +4,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    tr {
+        border: 1px solid #999999;
+    }
+</style>
 <h1>QUẢN LÝ THƯƠNG HIỆU</h1>
 <p>
     <a href="@Url.Action("Create", "Brand")"><i class="fa-solid fa-circle-plus"></i>THÊM THƯƠNG HIỆU</a>

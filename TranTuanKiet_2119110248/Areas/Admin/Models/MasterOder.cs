@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using TranTuanKiet_2119110248.Context;
 
-namespace TranTuanKiet_2119110248.Areas.Admin.Models
+namespace TranTuanKiet_2119110248.Models
 {
     public class MasterOder
     {
-        public List<Order> listOrder { get; set; }
-        public List<OrderDetail> ListOrderDetail { get; set; }
+        public new List<Order> ListOrder { get; set; }
+        public new List<OrderDetail> ListOrderDetail { get; set; }
+        public new List<User> ListUser { get; set; }
+        
     }
 }

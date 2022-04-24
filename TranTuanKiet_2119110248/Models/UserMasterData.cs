@@ -16,15 +16,23 @@ namespace TranTuanKiet_2119110248.Context
         [Display(Name = "Tên")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string FistName { get; set; }
-        //[Display(Name = "Tên đăng Nhập")]
+        [Display(Name = "Tên đăng Nhập")]
         //[Required(ErrorMessage = "Không được bỏ trống")]
         public string UserName { get; set; }
         [Display(Name = "Mật khẩu *")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string Password { get; set; }
+        [Display(Name = "Giới tính ")]
         public Nullable<bool> sex { get; set; }
+        [Display(Name = "Số Điện Thoại")]
+        [StringLength(10, ErrorMessage = "Số điện thoại không được nhiều hơn 10 số ")]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string Phone { get; set; }
+
+        [Display(Name = "Địa Chỉ")]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string Address { get; set; }
+      
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreaterDate { get; set; }
         [Display(Name = "Email")]

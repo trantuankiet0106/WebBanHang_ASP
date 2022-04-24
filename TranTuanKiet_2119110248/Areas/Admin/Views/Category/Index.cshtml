@@ -1,0 +1,88 @@
+﻿@model IEnumerable<TranTuanKiet_2119110248.Context.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<style>
+    tr {
+        border: 1px solid #999999;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" style="margin-left:10px">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.avatar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowOnHomePage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOnUtc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateOnUtc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td>
+        <img src="~/Content/images/Category/@item.avatar" class="img-fluid figure-img" style="height:50px" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Popular)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Slug)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShowOnHomePage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DisplayOrder)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Deleted)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdateOnUtc)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", "Category", new { id=item.id })"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="@Url.Action("Details", "Category", new {id=item.id })"><i class="fa-solid fa-circle-info"></i></a>
+        <a href="@Url.Action("Delete", "Category", new { id=item.id})"><i class="fa-solid fa-trash-can"></i></a>
+
+
+    </td>
+</tr>
+}
+
+</table>

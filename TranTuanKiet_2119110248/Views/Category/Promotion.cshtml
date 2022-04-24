@@ -8,6 +8,7 @@
 
 <h2>Sản Phẩm Khuyến Mãi</h2>
 
+
 <style>
     .pagination {
         display: inline-block;
@@ -143,10 +144,10 @@
 <section class="section-content padding-y">
     <div class="container">
 
-        
+
         @using (Html.BeginForm("Index", "Product", FormMethod.Get))
         {
-            
+
         }
         <strong class="mr-md-auto">@Model.Where(n => n.PriceDiscount != null).Count()    Sản Phẩm </strong>
 
@@ -162,7 +163,7 @@
                             <span class="badge badge-danger">@Math.Round(100 - (float)sale, 1)%</span>
 
                             <a href="@Url.Action("Detail", "Product", new { id = item.ProductId })">
-                                <img src="~/Content/images/Product/@item.Avatar">
+                                <img src="~/Content/images/Product/@item.Avatar" style="margin-top:20px">
                             </a>
 
                         </div> <!-- img-wrap.// -->
@@ -190,7 +191,12 @@
 
 
 
-                            <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>
+                            <div class="form-group col-md">
+                                <a href="#" id="addtocart" class="btn  btn-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="text" h>Thêm vào giỏ hàng</span>
+                                </a>
+                            </div> <!-- col.// -->
 
                         </figcaption>
                     </figure>
@@ -200,11 +206,6 @@
 
 
         </div> <!-- row end.// -->
-
-
-      
-
-
         Trang @(Model.PageCount< Model.PageNumber ? 0: Model.PageNumber)or @Model.PageCount
         @Html.PagedListPager(Model, Page => Url.Action("Promotion", new { Page, currentFilter = ViewBag.currentFilter }))
 

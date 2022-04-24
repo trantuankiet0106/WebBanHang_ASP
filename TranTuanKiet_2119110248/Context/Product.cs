@@ -27,5 +27,6 @@ namespace TranTuanKiet_2119110248.Context
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<int> TypeId { get; set; }
     }
 }

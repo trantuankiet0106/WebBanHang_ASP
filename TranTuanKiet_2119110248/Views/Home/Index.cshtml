@@ -23,19 +23,39 @@
 
                     <div class="row">
                         <aside class="col-lg col-md-3 flex-lg-grow-0">
+                            <li class="menu-category" data-toggle="dropdown" style="cursor:pointer;list-style:none">
+                                <h6>THƯƠNG HIỆU <i class="fa-solid fa-caret-down"></i></h6>
+                            </li>
+                            <div class=" dropdown-menu ">
+                                <nav class="row">
+                                    <div class="col-12">
+                                        @foreach (var item in Model.lstBrand)
+                                        {
+
+                                            <li>
+                                                <a href="@Url.Action("ProductBrandList","Product",new { id =item.BranID})" style="margin-left:10px;">@item.BrandName</a>
+                                            </li>
+
+                                        }
+                                    </div>
+
+                                </nav> <!--  row end .// -->
+                            </div> <!--  dropdown-menu dropdown-large end.// -->
+
                             <nav class="nav-home-aside">
                                 <h6 class="title-category">DANH MỤC <i class="d-md-none icon fa fa-chevron-down"></i></h6>
                                 <ul class="menu-category">
                                     @foreach (var item in Model.lstCategory)
                                     {
-                                        <li><a href="@Url.Action("ProductCategoryList","Product",new { id = item.id })">@item.name</a></li>
+                                        <li><a href="@Url.Action("ProductCategoryList","Product",new { id = item.id })" style="margin-left:20px;">@item.name</a></li>
 
                                     }
 
-                                    <li class="has-submenu">
-                                        <a href="@Url.Action("Category","Category")">Tất Cả Danh Mục</a>
-                                       
+                                    <li class=" menu-category">
+                                        <a href="@Url.Action("Category","Category")" style="margin-left:20px;">Tất Cả Danh Mục</a>
+
                                     </li>
+                                    <!---->
                                 </ul>
                             </nav>
                         </aside>  
@@ -73,22 +93,20 @@
                         <div class="col-md d-none d-lg-block flex-grow-1">
                             <aside class="special-home-right">
                                 <h6 class="bg-blue text-center text-white mb-0 p-2">Sản Phẩm Bán Chạy</h6>
+                       
                                 @foreach (var item  in Model.lstCategory.Where(n=>n.Popular==2))
                                 {
                             <div class="card-banner border-bottom">
                                 <div class="py-3" style="width:80%">
                                     <h6 class="card-title">@item.name</h6>
-                                    <a href="#" class="btn btn-secondary btn-sm"> Source now </a>
+                                    
+                                    <a href="@Url.Action("ProductCategoryList","Product",new { id = item.id})" class="btn btn-secondary btn-sm"> XEM THÊM </a>
                                 </div>
-
-                                <img src="~/Content/images/Category/@item.avatar" height="80" class="img-bg">
-                            
+                                
+                                    <img src="~/Content/images/Category/@item.avatar" height="80" class="img-bg">
+                               
                             </div>}
 
-
-                           
-                                <a href="#" class="btn btn-secondary btn-sm my"> Source now </a>
-                            
                                 <style>
                                     .my{
                                         background-color:red;
@@ -114,7 +132,7 @@
             <div class="card card-deal">
                 <div class="col-heading content-body">
                     <header class="section-heading">
-                        <h3 class="section-title">Giảm Giá</h3>
+                        <h3 class="section-title">Giảm Giá Sốc</h3>
                         <p>Hygiene equipments</p>
                     </header><!-- sect-heading -->
                     <div class="timer">
@@ -127,7 +145,7 @@
                 </div> <!-- col.// -->
                 <div class="row no-gutters items-wrap">
 
-                    @foreach (var item in Model.lstProduct.Where(n=>n.PriceDiscount !=null).Take(4))
+                    @foreach (var item in Model.lstProduct.Where(n=>n.PriceDiscount !=null && n.TypeId ==1).Take(4))
                     {
                         var sale =  item.PriceDiscount * 100 / item.ProductPrice;
                        
@@ -295,65 +313,7 @@
         <!-- =============== SECTION 2 END =============== -->
         <!-- =============== SECTION REQUEST =============== -->
 
-        <section class="padding-bottom">
-
-            <header class="section-heading heading-line">
-                <h4 class="title-section text-uppercase">Request for Quotation</h4>
-            </header>
-
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card-banner banner-quote overlay-gradient" style="background-image: url('~/Content/images/banners/banner9.jpg');">
-                        <div class="card-img-overlay white">
-                            <h3 class="card-title">An easy way to send request to suppliers</h3>
-                            <p class="card-text" style="max-width: 400px">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt.
-                            </p>
-                            <a href="" class="btn btn-primary rounded-pill">Learn more</a>
-                        </div>
-                    </div>
-                </div> <!-- col // -->
-                <div class="col-md-4">
-
-                    <div class="card card-body">
-                        <h4 class="title py-3">One Request, Multiple Quotes</h4>
-                        <form>
-                            <div class="form-group">
-                                <input class="form-control" name="" placeholder="What are you looking for?" type="text">
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input class="form-control" placeholder="Quantity" name="" type="text">
-
-                                    <select class="custom-select form-control">
-                                        <option>Pieces</option>
-                                        <option>Litres</option>
-                                        <option>Tons</option>
-                                        <option>Gramms</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group text-muted">
-                                <p>Select template type:</p>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" value="option1">
-                                    <span class="form-check-label">Request price</span>
-                                </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" value="option2">
-                                    <dspaniv class="form-check-label">Request a sample</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-warning">Request for quote</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div> <!-- col // -->
-            </div> <!-- row // -->
-        </section>
+       
 
         <!-- =============== SECTION REQUEST .//END =============== -->
         <!-- =============== SECTION ITEMS =============== -->
@@ -365,7 +325,7 @@
 
             <div class="row row-sm">
 
-                @foreach (var item in Model.lstProduct.Take(12))
+                @foreach (var item in Model.lstProduct.Where(n=>n.TypeId==2).Take(12))
                 {
                     <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                         <div class="card card-sm card-product-grid">

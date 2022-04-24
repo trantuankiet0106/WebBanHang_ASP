@@ -23,11 +23,35 @@ namespace TranTuanKiet_2119110248.Context
         [NotMapped]
         public HttpPostedFileBase ImageUpload { get; set; }
     }
+
+
+    [MetadataType(typeof(CategoryMasterData))]
+    public partial class Category
+    {
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+    }
+
     [MetadataType(typeof(UserMasterData))]
     public partial class User
     {
-       
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 
 
+    [MetadataType(typeof(OderMasterdata))]
+    public partial class OderMasterdata
+    {
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+    }
+
+    [MetadataType(typeof(Oder))]
+    public partial class Oder
+    {
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+    }
 }

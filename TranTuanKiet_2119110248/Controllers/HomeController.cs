@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facebook;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 using System.Web.Services.Description;
 using TranTuanKiet_2119110248.Context;
 using TranTuanKiet_2119110248.Models;
+using System.Configuration;
+using Microsoft.Azure.Management.ContainerService.Fluent.Models;
 
 namespace TranTuanKiet_2119110248.Controllers
 {
@@ -15,6 +18,16 @@ namespace TranTuanKiet_2119110248.Controllers
     {
         Webbanhang webbanhang = new Webbanhang();
 
+        private Uri RedirectUri
+        {
+            get{
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("Index");
+                return uriBuilder.Uri;
+            }
+        }
         public ActionResult Index()
 
         {
@@ -24,8 +37,27 @@ namespace TranTuanKiet_2119110248.Controllers
             homeModel.lstCategory = webbanhang.Categories.ToList();
             homeModel.lstProduct = webbanhang.Products.ToList();
             homeModel.lstSlides = webbanhang.Slides.ToList();
+            homeModel.lstBrand = webbanhang.Brands.ToList();
+
+
             return View(homeModel);
         }
+        public ActionResult LoginFB()
+        {
+            var fb = new FacebookClient();
+            var LoginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_Secret= ConfigurationManager.AppSettings["FbAppSecret"],
+            
+                redirect_uri =RedirectUri.AbsoluteUri,
+                response_type="code",
+                scope="Email",
+            });
+            return Redirect(LoginUrl.AbsoluteUri);
+        }
+       
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -38,6 +70,7 @@ namespace TranTuanKiet_2119110248.Controllers
         
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User _user)
@@ -55,13 +88,15 @@ namespace TranTuanKiet_2119110248.Controllers
                 }
                 else
                 {
-                    ViewBag.error = "Email already exists";
+                    ViewBag.error = "Email Tồn tại";
                     return View();
                 }
 
 
             }
             return View();
+
+
         }
         public static string GetMD5(string str)
         {
@@ -105,13 +140,12 @@ namespace TranTuanKiet_2119110248.Controllers
                 else
                 {
 
-         
+                    ViewBag.error = "Đăng nhập thất bại";
                     return RedirectToAction("Login");
                 }
             }
             return View();
         }
-
 
         //Logout
         public ActionResult Logout()

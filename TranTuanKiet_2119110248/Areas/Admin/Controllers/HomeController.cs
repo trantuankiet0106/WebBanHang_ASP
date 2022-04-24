@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using TranTuanKiet_2119110248.Context;
+using TranTuanKiet_2119110248.Models;
 
 namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
 {
@@ -13,15 +11,11 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
-            //if (Session["idUser"] != null)
-            //{
-            //    var lstProduct = webbanhang.Products.ToList();
-            //    return View(lstProduct);
-            //}
-            //else
-            //{
-            return View("Index");
-            //}
+            MasterOder masterOder = new MasterOder();
+            masterOder.ListOrderDetail = webbanhang.OrderDetails.ToList();
+            masterOder.ListUser = webbanhang.Users.ToList();
+            return View(masterOder);
+           
 
 
         }

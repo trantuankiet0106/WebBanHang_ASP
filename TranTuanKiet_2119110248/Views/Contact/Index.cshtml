@@ -1,0 +1,54 @@
+﻿@model TranTuanKiet_2119110248.Context.Contact
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #mapCanvas {
+        width: 100%;
+        height:500px;
+    }
+</style>
+<script>
+    function initMap() {
+      
+        const uluru = { lat: 10.824735806231196, lng: 106.77181640298802 };
+        const map = new google.maps.Map(document.getElementById("mapCanvas"), {
+            zoom: 14,
+            center: uluru,
+        });
+        const contentString = '@Html.Raw(Model.Address)';
+        const infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map,
+            title: "Địa Chỉ",
+        });
+
+        marker.addListener("click", () => {
+            infowindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initMap)
+</script>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Thông Tin liên hệ</h2>
+            @Html.Raw(Model.Address)
+        </div>
+        <div class="col-md-6">
+            <h2>Bản Đồ</h2>
+            <div class="map" id="mapCanvas"></div>
+        </div>
+
+    </div>
+</div>

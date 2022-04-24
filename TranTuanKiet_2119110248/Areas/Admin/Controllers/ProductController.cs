@@ -1,12 +1,16 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.MobileControls;
+using System.Windows.Documents;
 using TranTuanKiet_2119110248.Context;
+using static TranTuanKiet_2119110248.Common;
 
 namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
 {
@@ -16,7 +20,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult Index(string currentFilter,string searchString,int? page)
         {
-            var lstProduct = new List<Product>();
+            var lstProduct = new List<Product   >();
             if(searchString != null)
             {
                 page = 1;
@@ -42,30 +46,65 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-
+            this.LoadData();
             return View();
         }
+
+        private void LoadData()
+        {
+            Common common = new Common();
+            var lstCat = webbanhang.Categories.ToList();
+            ListtoDataTableConverter converter = new ListtoDataTableConverter();
+            DataTable dtCategory = converter.ToDataTable(lstCat);
+            ViewBag.ListCategory = common.ToSelectList(dtCategory, "id", "name");
+
+
+            var lstBrand = webbanhang.Brands.ToList();
+            DataTable dtBrand = converter.ToDataTable(lstBrand);
+            ViewBag.ListBrand = common.ToSelectList(dtBrand, "BranID", "BrandName");
+
+            List<ProductType> lstproductType = new List<ProductType>();
+            ProductType productType1 = new ProductType();
+            productType1.Id = 01;
+            productType1.Name = "Giảm giá sốc";
+            lstproductType.Add(productType1);
+
+            productType1 = new ProductType();
+            productType1.Id = 02;
+            productType1.Name = "Đề xuất";
+            lstproductType.Add(productType1);
+            DataTable dtProType = converter.ToDataTable(lstproductType);
+            ViewBag.ListProType = common.ToSelectList(dtProType, "Id", "Name");
+
+        }
+
         [HttpPost]
         public ActionResult Create(Product objProduct)
         {
-            try
+            this.LoadData();
+            if (ModelState.IsValid)
             {
-                if (objProduct.ImageUpload != null)
+                try
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
-                    string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
-                    fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
-                    objProduct.Avatar = fileName;
-                    objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
+                    if (objProduct.ImageUpload != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
+                        string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
+                        fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
+                        objProduct.Avatar = fileName;
+                        objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
+                    }
+                    webbanhang.Products.Add(objProduct);
+                    webbanhang.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                webbanhang.Products.Add(objProduct);
-                webbanhang.SaveChanges();
-                return RedirectToAction("Index");
+                catch (Exception)
+                {
+                    return View();
+                }
+
             }
-            catch (Exception)
-            {
-                return View();
-            }
+            return View();
 
         }
         [HttpGet]
@@ -94,24 +133,34 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            this.LoadData();
             var objProduct = webbanhang.Products.Where(n => n.ProductId == id).FirstOrDefault();
-
+       
             return View(objProduct);
         }
+      
         [HttpPost]
-        public ActionResult Edit(Product objProduct)
+        public ActionResult Edit(Product objPro)
         {
-            if (objProduct.ImageUpload != null)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
-                string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
-                fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
-                objProduct.Avatar = fileName;
-                objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
-            }
-            webbanhang.Entry(objProduct).State = EntityState.Modified;
-            webbanhang.SaveChanges();
-            return View(objProduct);
+
+            if (objPro.ImageUpload != null)
+                {
+
+                    string fileName = Path.GetFileNameWithoutExtension(objPro.ImageUpload.FileName);
+                    string extension = Path.GetExtension(objPro.ImageUpload.FileName);
+                    fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
+                objPro.Avatar = fileName;
+                objPro.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
+                }
+                webbanhang.Entry(objPro).State = EntityState.Modified;
+                webbanhang.SaveChanges();
+
+            return RedirectToAction("Index");
+
+
+
         }
+
+   
     }
 }

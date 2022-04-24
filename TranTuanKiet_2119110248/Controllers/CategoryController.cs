@@ -24,6 +24,7 @@ namespace TranTuanKiet_2119110248.Controllers
         }   
         public ActionResult Promotion(string currentFilter, string searchString, int? page)
         {
+          
             var lstProduct = new List<Product>();
             if (searchString != null)
             {

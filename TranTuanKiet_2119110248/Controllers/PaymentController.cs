@@ -14,7 +14,12 @@ namespace TranTuanKiet_2119110248.Controllers
 
         // GET: Payment
         public ActionResult Index()
+            
         {
+            CartModel cartmodel = new CartModel();
+
+            var product = webbanhang.Products.ToList();
+
             if (Session["idUser"] == null)
             {
                 return RedirectToAction("Login", "Home");
@@ -22,14 +27,20 @@ namespace TranTuanKiet_2119110248.Controllers
             else
             {
                 var lstCart = (List<CartModel>)Session["cart"];
+
                 Order objorder = new Order();
-                objorder.Name = "DonHang-" + DateTime.Now.ToString("yyyyMMddHmmss");
-                objorder.UserId = int.Parse(Session["idUser"].ToString());
-                objorder.CreatedOnUtc = DateTime.Now;
-                objorder.Status = 1;
               
-                webbanhang.Orders.Add(objorder);
-                webbanhang.SaveChanges();
+                    objorder.Name = "DonHang-" + DateTime.Now.ToString("yyyyMMddHmmss");
+                    objorder.UserId = int.Parse(Session["idUser"].ToString());
+                    objorder.CreatedOnUtc = DateTime.Now;
+                    objorder.Status = 1;
+                 
+                  
+
+                    webbanhang.Orders.Add(objorder);
+                    webbanhang.SaveChanges();
+                
+               
                 int intOrderId = objorder.Id;
                 List<OrderDetail> lstOrderDetail = new List<OrderDetail>(); 
                 foreach(var item in lstCart)
@@ -40,6 +51,8 @@ namespace TranTuanKiet_2119110248.Controllers
                     obj.ProductId = item.Product.ProductId;
                     //thêm tên sản phẩm
                     obj.ProductName = item.Product.ProductName;
+                    obj.price = item.Product.ProductPrice * obj.Quantity;
+                    obj.prices= item.Product.ProductPrice ;
                     lstOrderDetail.Add(obj);
                 }
                 webbanhang.OrderDetails.AddRange(lstOrderDetail);
