@@ -1,13 +1,20 @@
 ﻿@model TranTuanKiet_2119110248.Context.Product
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Recycle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<div>
-    <h4>Product</h4>
+<style>
+    .a{
+        border: solid 1px black;
+        padding:2px;
+        background-color:#bbb5b5;
+    }
+</style>
+<div style="margin-left:10px;">
+    <h4>Thông tin sản phẩm</h4>
     <hr />
-    <dl class="dl-horizontal" style="margin-left:10px">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ProductName)
         </dt>
@@ -20,10 +27,9 @@
             @Html.DisplayNameFor(model => model.Avatar)
         </dt>
 
-        <td>
- 
-            <img src="~/Content/images/Product//@Model.Avatar" />
-        </td>
+        <dd>
+            @Html.DisplayFor(model => model.Avatar)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.ProductPrice)
@@ -105,19 +111,19 @@
             @Html.DisplayFor(model => model.UpdateDate)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeId)
+        </dd>
+
     </dl>
-
-    @using (Html.BeginForm("Delete", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-
-    <input type="submit" value="Delete" class="btn btn-default" />
-    @Html.ActionLink("Back to List", "Index")
-    <input name="ProductId" value="@Model.ProductId" style="visibility:hidden" />
-
-
 </div>
-    }
-</div>
+<p>
+    <a href="@Url.Action("DEL", "Product", new { id = Model.ProductId })"class="a"onclick="myFunction()"><i class="fa-solid fa-trash"></i>XÓA</a> |
+    <a href="@Url.Action("Index", "Product")"class="a"><i class="fa-solid fa-arrow-left-long" style="margin-left:10px;"></i>TRỞ VỀ</a>
+   
+</p>
+

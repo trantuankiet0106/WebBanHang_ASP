@@ -81,6 +81,19 @@ namespace TranTuanKiet_2119110248
             defaults: new { controller = "Home",action ="Register", id = UrlParameter.Optional },
                             new[] { "TranTuanKiet_2119110248.Controllers" }
         );
+            //register
+            routes.MapRoute(
+            name: "Add cart",
+            url: "them-gio-hang",
+            defaults: new { controller = "Shoppingcart", action = "AddToCart", id = UrlParameter.Optional },
+                            new[] { "TranTuanKiet_2119110248.Controllers" }
+        ); //register
+            routes.MapRoute(
+            name: "Detail-admin",
+            url: "Chi-tiet-don-hang",
+            defaults: new { controller = "OrderManagementController", action = "Detail", id = UrlParameter.Optional },
+                            new[] { "TranTuanKiet_2119110248.Controllers" }
+        );
             //Index
             routes.MapRoute(
                name: "Default",

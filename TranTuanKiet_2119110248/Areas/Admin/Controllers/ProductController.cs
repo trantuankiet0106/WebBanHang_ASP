@@ -17,10 +17,13 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         Webbanhang webbanhang = new Webbanhang();
+
+      
         // GET: Admin/Product
         public ActionResult Index(string currentFilter,string searchString,int? page)
         {
-            var lstProduct = new List<Product   >();
+            var lstProduct = new List<Product>();
+            var lstcat = new List<Category>();
             if(searchString != null)
             {
                 page = 1;
@@ -40,13 +43,42 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
             ViewBag.currentFilter = searchString;
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            lstProduct = lstProduct.OrderByDescending(n => n.ProductId).ToList();
+            lstProduct = lstProduct.OrderByDescending(n => n.ProductId).Where(n=>n.IsDelete==false).ToList();
+    
         return View(lstProduct.ToPagedList(pageNumber,pageSize));
         }
+        //------------------
+        public ActionResult Viewrecycle(string currentFilter, string searchString, int? page)
+        {
+            var lstProduct = new List<Product>();
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                lstProduct = webbanhang.Products.Where(n => n.ProductName.Contains(searchString)).ToList();
+            }
+            else
+            {
+                lstProduct = webbanhang.Products.ToList();
+            }
+            ViewBag.currentFilter = searchString;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            lstProduct = lstProduct.OrderByDescending(n => n.ProductId).Where(n=>n.IsDelete==true).ToList();
+            return View(lstProduct.ToPagedList(pageNumber, pageSize));
+        }
+        //---------
         [HttpGet]
         public ActionResult Create()
         {
             this.LoadData();
+           
             return View();
         }
 
@@ -76,14 +108,14 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
             DataTable dtProType = converter.ToDataTable(lstproductType);
             ViewBag.ListProType = common.ToSelectList(dtProType, "Id", "Name");
 
+         
         }
 
         [HttpPost]
         public ActionResult Create(Product objProduct)
         {
             this.LoadData();
-            if (ModelState.IsValid)
-            {
+           
                 try
                 {
                     if (objProduct.ImageUpload != null)
@@ -93,7 +125,9 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
                         fileName = fileName + "_" + long.Parse(DateTime.Now.ToString("yyyyMMddhhmmss")) + extension;
                         objProduct.Avatar = fileName;
                         objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/Product"), fileName));
+                   
                     }
+                    objProduct.IsDelete = false;
                     webbanhang.Products.Add(objProduct);
                     webbanhang.SaveChanges();
                     return RedirectToAction("Index");
@@ -103,8 +137,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
                     return View();
                 }
 
-            }
-            return View();
+          
 
         }
         [HttpGet]
@@ -142,7 +175,7 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Product objPro)
         {
-
+            this.LoadData();
             if (objPro.ImageUpload != null)
                 {
 
@@ -161,6 +194,34 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
 
         }
 
-   
+        //thung rac
+
+        [HttpGet]
+        public ActionResult Recycle(int id)
+        {
+            var objProduct = webbanhang.Products.Where(n => n.ProductId == id).FirstOrDefault();
+            return View(objProduct);
+        }
+
+        //-------------
+        public ActionResult restore(int Id)
+        {
+            Product prod = webbanhang.Products.Find(Id);
+            prod.IsDelete = false;
+
+            webbanhang.SaveChanges();
+            return RedirectToAction("Viewrecycle", "Product");
+        }
+
+       
+        public ActionResult Del(int Id)
+        {
+            
+            Product prod = webbanhang.Products.Find(Id);
+            prod.IsDelete = true;
+            webbanhang.SaveChanges();
+            return RedirectToAction("Index", "Product");
+        }
+
     }
 }

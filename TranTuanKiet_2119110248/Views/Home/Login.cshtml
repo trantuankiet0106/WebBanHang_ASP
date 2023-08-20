@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_layout1.cshtml";
 }
 
-<div class="row justify-content-md-center">
+@*<div class="row justify-content-md-center">
     <div class="col-md-4">
         <div class="card">
             <div class="card-header" style="color:red">
@@ -19,11 +19,12 @@
                     @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", type = "Password" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", type = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+             
+                </div>
 
                     <div class="form-group">
                         <a href="~/Home/LoginFB">facebook</a>
@@ -32,11 +33,61 @@
 
                         </div>
                         <input type="submit" name="submit" class="btn btn-primary" value="Đăng Nhập" />
-
+                        
                     </div>
                 }
+
+
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
+
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h3 class="mb-5">Sign in</h3>
+
+                            <div class="form-group">
+                            <h3>UserID</h3>
+                                @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", type = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex justify-content-start mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                                <label class="form-check-label" for="form1Example3"> Remember password </label>
+                            </div>
+                        
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" style="background-color: #167BFF">Submit</button>
+                        }
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+</script>
+<style>
+    h3{
+        margin-right:350px;
+    }
+</style>

@@ -58,6 +58,10 @@
           <Property Name="Status" Type="int" />
           <Property Name="ProducName" Type="nvarchar" MaxLength="400" />
           <Property Name="price" Type="float" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="300" />
+          <Property Name="Diachi" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -70,6 +74,7 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="300" />
           <Property Name="price" Type="float" />
           <Property Name="prices" Type="float" />
+          <Property Name="AvataOrder" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Webbanhang.dbo.Picture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -131,13 +136,13 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <Property Name="FistName" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="varchar" MaxLength="100" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="sex" Type="bit" />
           <Property Name="Phone" Type="nchar" MaxLength="11" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
           <Property Name="IsDelete" Type="bit" />
           <Property Name="CreaterDate" Type="date" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="Admin" Type="int" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -236,13 +241,13 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <EntitySet Name="Brands" EntityType="WebbanhangModel.Brand" />
           <EntitySet Name="Categories" EntityType="WebbanhangModel.Category" />
           <EntitySet Name="Contacts" EntityType="WebbanhangModel.Contact" />
-          <EntitySet Name="Orders" EntityType="WebbanhangModel.Order" />
           <EntitySet Name="Products" EntityType="WebbanhangModel.Product" />
           <EntitySet Name="sysdiagrams" EntityType="WebbanhangModel.sysdiagram" />
-          <EntitySet Name="Users" EntityType="WebbanhangModel.User" />
           <EntitySet Name="Pictures" EntityType="WebbanhangModel.Picture" />
           <EntitySet Name="Slides" EntityType="WebbanhangModel.Slide" />
           <EntitySet Name="OrderDetails" EntityType="WebbanhangModel.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="WebbanhangModel.Order" />
+          <EntitySet Name="Users" EntityType="WebbanhangModel.User" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -297,18 +302,6 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <Property Name="Status" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="ProducName" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Double" />
-        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -337,23 +330,6 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FistName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="sex" Type="Boolean" />
-          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsDelete" Type="Boolean" />
-          <Property Name="CreaterDate" Type="DateTime" Precision="0" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Admin" Type="Int32" />
         </EntityType>
         <EntityType Name="Picture">
           <Key>
@@ -384,6 +360,40 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <Property Name="ProductName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
           <Property Name="prices" Type="Double" />
+          <Property Name="AvataOrder" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ProducName" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <Property Name="UserName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Diachi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FistName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreaterDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Admin" Type="Int32" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -461,19 +471,6 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="WebbanhangModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="ProducName" ColumnName="ProducName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="WebbanhangModel.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -505,24 +502,6 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="WebbanhangModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Admin" ColumnName="Admin" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CreaterDate" ColumnName="CreaterDate" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="FistName" ColumnName="FistName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Pictures">
             <EntityTypeMapping TypeName="WebbanhangModel.Picture">
               <MappingFragment StoreEntitySet="Picture">
@@ -546,6 +525,7 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="WebbanhangModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="AvataOrder" ColumnName="AvataOrder" />
                 <ScalarProperty Name="prices" ColumnName="prices" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -553,6 +533,41 @@ warning 6002: The table/view 'Webbanhang.dbo.Slide' does not have a primary key 
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="WebbanhangModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="ProducName" ColumnName="ProducName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WebbanhangModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreaterDate" ColumnName="CreaterDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FistName" ColumnName="FistName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

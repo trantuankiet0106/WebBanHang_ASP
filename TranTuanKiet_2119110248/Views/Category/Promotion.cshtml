@@ -1,6 +1,7 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
 @model PagedList.IPagedList<TranTuanKiet_2119110248.Context.Product>
+
 @{
     ViewBag.Title = "Promotion";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -140,6 +141,7 @@
         }
 </style>
 
+
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
     <div class="container">
@@ -166,7 +168,7 @@
                                 <img src="~/Content/images/Product/@item.Avatar" style="margin-top:20px">
                             </a>
 
-                        </div> <!-- img-wrap.// -->
+                        </div> <!-- aaimg-wrap.// -->
                         <figcaption class="info-wrap">
                             <a href="@Url.Action("Detail", "Product", new { id = item.ProductId })" class="title mb-2">@item.ProductName</a>
                             <div class="price-wrap">
@@ -191,12 +193,15 @@
 
 
 
-                            <div class="form-group col-md">
-                                <a href="#" id="addtocart" class="btn  btn-primary">
+                            <!--<div class="form-group col-md">
+                                <a href="/them-gio-hang?id=@item.ProductId&quantity=1"-->
+                            @*id="addtocart"*@
+                            <!--class="btn  btn-primary">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span class="text" h>Thêm vào giỏ hàng</span>
                                 </a>
-                            </div> <!-- col.// -->
+                            </div>-->
+                            <!-- col.// -->
 
                         </figcaption>
                     </figure>
@@ -206,7 +211,7 @@
 
 
         </div> <!-- row end.// -->
-        Trang @(Model.PageCount< Model.PageNumber ? 0: Model.PageNumber)or @Model.PageCount
+        Trang @(Model.PageCount< Model.PageNumber ? 0: Model.PageNumber) of @Model.PageCount
         @Html.PagedListPager(Model, Page => Url.Action("Promotion", new { Page, currentFilter = ViewBag.currentFilter }))
 
     </div> <!-- container .//  -->

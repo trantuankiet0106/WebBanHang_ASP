@@ -22,6 +22,9 @@ namespace TranTuanKiet_2119110248.Context
     {
         [NotMapped]
         public HttpPostedFileBase ImageUpload { get; set; }
+        public object ViewDetail { get; internal set; }
+
+      
     }
 
 
@@ -40,18 +43,18 @@ namespace TranTuanKiet_2119110248.Context
     }
 
 
-    [MetadataType(typeof(OderMasterdata))]
-    public partial class OderMasterdata
+    [MetadataType(typeof(OrderMasterData))]
+    public partial class Order 
     {
         [NotMapped]
         public HttpPostedFileBase ImageUpload { get; set; }
     }
 
-    [MetadataType(typeof(Oder))]
-    public partial class Oder
+    [MetadataType(typeof(OrderDetailMasterData))]
+    public partial class OrderDetail
     {
         [NotMapped]
         public HttpPostedFileBase ImageUpload { get; set; }
-
     }
+    
 }

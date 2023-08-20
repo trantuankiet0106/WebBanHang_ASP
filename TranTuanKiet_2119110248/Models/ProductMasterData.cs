@@ -14,7 +14,7 @@ namespace TranTuanKiet_2119110248.Context
         [Required(ErrorMessage = "Không được bỏ trống Tên sản Phẩm")]
         public string ProductName { get; set; }
         [Display(Name = "Hình ảnh")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+      
         public string Avatar { get; set; }
         [Display(Name = "Giá Gốc")]
   
@@ -30,7 +30,7 @@ namespace TranTuanKiet_2119110248.Context
         [Display(Name = "Mô Tả Đầy Đủ")]
         public string FullDes { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<bool> IsDelete { get; set; }
+        public Nullable<bool> IsDelete { get ; set; }
         [Display(Name = "Ngày tạo")]
         public Nullable<System.DateTime> CreateDate { get; set; }
         [Display(Name = "Ngày chỉnh sữa")]

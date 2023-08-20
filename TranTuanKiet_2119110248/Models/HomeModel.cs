@@ -14,6 +14,10 @@ namespace TranTuanKiet_2119110248.Models
         public new List<Picture>lstPicture { get; set; }
         public new List<Brand>lstBrand { get; set; }
         public new List<About> lstabouts { get; set; }
+        public new List<OrderDetail> lstOrderDetail { get; set; }
+        public new List<User> lstUsers { get; set; }
+        public int id { get; set; }
+
 
     }
 }

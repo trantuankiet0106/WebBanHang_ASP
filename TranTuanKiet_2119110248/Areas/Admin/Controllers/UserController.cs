@@ -56,6 +56,23 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
             webbanhang.SaveChanges();
             return View(objB);
         }
+        [HttpGet]
+
+        public ActionResult Delete(int id)
+        {
+            var objuu = webbanhang.Users.Where(n => n.UserID == id).FirstOrDefault();
+            return View(objuu);
+        }
+        [HttpPost]
+        public ActionResult Delete(User objU)
+        {
+  
+            var objUS = webbanhang.Users.Where(n => n.UserID == objU.UserID).FirstOrDefault();
+            webbanhang.Users.Remove(objUS);
+            webbanhang.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

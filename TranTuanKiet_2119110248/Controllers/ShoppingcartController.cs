@@ -12,21 +12,29 @@ namespace TranTuanKiet_2119110248.Controllers
     public class ShoppingcartController : Controller
     {
         Webbanhang webbanhang = new Webbanhang();
+        private const string CartSession = "CartSession";
         // GET: Shoppingcart
+
         public ActionResult Shoppingcart()
         {
+
+
             return View((List<CartModel>)Session["cart"]);
-            //    var lstProduc = (List<CartModel>)Session["cart"];
-            //    return View(lstProduc);
+
         }
         public ActionResult AddToCart(int id, int quantity)
         {
-            if (Session["cart"] == null) 
+
+
+            if (Session["cart"] == null)
             {
                 List<CartModel> cart = new List<CartModel>();
-                cart.Add(new CartModel { Product = webbanhang.Products.Find(id),Quantity = quantity });
+                cart.Add(new CartModel { Product = webbanhang.Products.Find(id), Quantity = quantity });
                 Session["cart"] = cart;
                 Session["count"] = 1;
+                  
+                  
+
             }
             else
             {
@@ -48,6 +56,10 @@ namespace TranTuanKiet_2119110248.Controllers
                 Session["cart"] = cart;
             }
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
+
+
+       
+
         }
         private int isExist(int id)
         {

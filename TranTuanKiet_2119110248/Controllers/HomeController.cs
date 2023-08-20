@@ -11,6 +11,11 @@ using TranTuanKiet_2119110248.Context;
 using TranTuanKiet_2119110248.Models;
 using System.Configuration;
 using Microsoft.Azure.Management.ContainerService.Fluent.Models;
+using static TranTuanKiet_2119110248.Common;
+using static System.Resources.ResXFileRef;
+using System.Data;
+using System.Windows;
+using System.Web.UI;
 
 namespace TranTuanKiet_2119110248.Controllers
 {
@@ -20,19 +25,66 @@ namespace TranTuanKiet_2119110248.Controllers
 
         private Uri RedirectUri
         {
-            get{
+            get
+            {
                 var uriBuilder = new UriBuilder(Request.Url);
                 uriBuilder.Query = null;
                 uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("Index");
+                uriBuilder.Path = Url.Action("FacebookCallback");
                 return uriBuilder.Uri;
             }
+        }
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code = code
+            });
+
+
+            var accessToken = result.access_token;
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                fb.AccessToken = accessToken;
+                // Get the user's information, like email, first name, middle name etc
+                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email");
+                string email = me.email;
+                string userName = me.email;
+                string firstname = me.first_name;
+                string middlename = me.middle_name;
+                string lastname = me.last_name;
+
+                var user = new User();
+                user.Email = email;
+                user.UserName = email;
+
+                user.UserName = firstname + " " + middlename + " " + lastname;
+                user.CreaterDate = DateTime.Now;
+
+            }
+            return Redirect("/");
+        }
+        public ActionResult LoginFB()
+        {
+            var fb = new FacebookClient();
+            var LoginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_Secret = ConfigurationManager.AppSettings["FbAppSecret"],
+
+                redirect_uri = RedirectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "Email",
+            });
+            return Redirect(LoginUrl.AbsoluteUri);
         }
         public ActionResult Index()
 
         {
-
-
             HomeModel homeModel = new HomeModel();
             homeModel.lstCategory = webbanhang.Categories.ToList();
             homeModel.lstProduct = webbanhang.Products.ToList();
@@ -42,32 +94,17 @@ namespace TranTuanKiet_2119110248.Controllers
 
             return View(homeModel);
         }
-        public ActionResult LoginFB()
-        {
-            var fb = new FacebookClient();
-            var LoginUrl = fb.GetLoginUrl(new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_Secret= ConfigurationManager.AppSettings["FbAppSecret"],
-            
-                redirect_uri =RedirectUri.AbsoluteUri,
-                response_type="code",
-                scope="Email",
-            });
-            return Redirect(LoginUrl.AbsoluteUri);
-        }
-       
 
         [HttpGet]
         public ActionResult Login()
         {
-        
+
             return View();
         }
 
         public ActionResult Register()
         {
-        
+
             return View();
         }
 
@@ -75,6 +112,8 @@ namespace TranTuanKiet_2119110248.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(User _user)
         {
+
+
             if (ModelState.IsValid)
             {
                 var check = webbanhang.Users.FirstOrDefault(s => s.Email == _user.Email);
@@ -89,6 +128,7 @@ namespace TranTuanKiet_2119110248.Controllers
                 else
                 {
                     ViewBag.error = "Email Tồn tại";
+
                     return View();
                 }
 
@@ -128,19 +168,27 @@ namespace TranTuanKiet_2119110248.Controllers
                     Session["Email"] = data.FirstOrDefault().Email;
                     Session["idUser"] = data.FirstOrDefault().UserID;
                     Session["Admin"] = data.FirstOrDefault().Admin;
-                  if(Session["Admin"]!=null)
+                    Session["Address"] = data.FirstOrDefault().Address;
+                    Session["Phone"] = data.FirstOrDefault().Phone;
+
+
+                    if (Session["Admin"] != null)
                     {
                         return RedirectToAction("Index", "Admin/Home");
                     }
                     else
                     {
-                        return RedirectToAction("Index");
+
+                       return RedirectToAction("Index");
+                       // return Content("<script language='javascript' type='text/javascript'>alert('Thanks for Feedback!');</script>");
+
                     }
+          
+
                 }
                 else
                 {
 
-                    ViewBag.error = "Đăng nhập thất bại";
                     return RedirectToAction("Login");
                 }
             }
@@ -151,7 +199,48 @@ namespace TranTuanKiet_2119110248.Controllers
         public ActionResult Logout()
         {
             Session.Clear();//remove session
-            return RedirectToAction("Login");
+                            return RedirectToAction("Login","Home");
+          
+        }
+        //login khi gio hang co san pham
+        [HttpGet]
+        public ActionResult Login2()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login2(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+                var f_password = GetMD5(password);
+                var data = webbanhang.Users.Where(s => s.Email.Equals(email) && s.Password.Equals(f_password)).ToList();
+                if (data.Count() > 0)
+                {
+                    //add session
+                    Session["FullName"] = data.FirstOrDefault().FistName + " " + data.FirstOrDefault().LastName;
+                    Session["Email"] = data.FirstOrDefault().Email;
+                    Session["idUser"] = data.FirstOrDefault().UserID;
+                    Session["Admin"] = data.FirstOrDefault().Admin;
+                    Session["Address"] = data.FirstOrDefault().Address;
+                    Session["Phone"] = data.FirstOrDefault().Phone;
+
+
+
+                        return RedirectToAction("Shoppingcart", "Shoppingcart");
+
+                    
+                }
+                else
+                {
+
+                    ViewBag.error = "Đăng nhập thất bại";
+                    return RedirectToAction("Login");
+                }
+            }
+            return View();
         }
 
     }

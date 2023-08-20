@@ -23,21 +23,21 @@ namespace TranTuanKiet_2119110248.Context
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string Password { get; set; }
         [Display(Name = "Giới tính ")]
-        public Nullable<bool> sex { get; set; }
+        public string Sex { get; set; }
         [Display(Name = "Số Điện Thoại")]
         [StringLength(10, ErrorMessage = "Số điện thoại không được nhiều hơn 10 số ")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string Phone { get; set; }
-
         [Display(Name = "Địa Chỉ")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string Address { get; set; }
-      
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreaterDate { get; set; }
+
         [Display(Name = "Email")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+        [EmailAddress(ErrorMessage = "Phải nhập định dạng Email @gmail.com")]
         public string Email { get; set; }
+
         public Nullable<int> Admin { get; set; }
     }
 }

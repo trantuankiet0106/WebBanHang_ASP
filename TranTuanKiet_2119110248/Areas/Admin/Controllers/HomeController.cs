@@ -14,6 +14,8 @@ namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
             MasterOder masterOder = new MasterOder();
             masterOder.ListOrderDetail = webbanhang.OrderDetails.ToList();
             masterOder.ListUser = webbanhang.Users.ToList();
+            masterOder.ListOrder = webbanhang.Orders.ToList();
+            ViewBag.User = webbanhang.Users.Where(n=>n.UserName!=null).ToList();
             return View(masterOder);
            
 

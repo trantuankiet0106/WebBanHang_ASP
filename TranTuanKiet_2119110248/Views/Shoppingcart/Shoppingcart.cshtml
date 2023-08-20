@@ -40,41 +40,63 @@
                     <table class="table table-borderless table-shopping-cart">
                         <thead class="text-muted">
                             <tr class="small text-uppercase">
-                                <th scope="col">Product</th>
-                                <th scope="col" width="120">Quantity</th>
-                                <th scope="col" width="120">Price</th>
-                                <th scope="col" class="text-right" width="200"> </th>
+                                <style>
+                                    .text{
+                                        text-align:center;
+                                    }
+                                </style>
+                                <th scope="col" width="350" class="text">Sản Phẩm</th>
+                                <th scope="col" width="60" class="text">Số Lượng</th>
+                                <th scope="col" width="140">giá Sản Phẩm</th>
+                                <th scope="col" width="150" >Tổng </th>
+                              
                             </tr>
                         </thead>
+                     
                         <tbody>
                             @if (Model != null)
                             {
                                 foreach (var item in Model)
                                 {
-                                    <tr id="Product-@item.Product.ProductId">
-                                        <td>
-                                            <figure class="itemside">
-                                                <div class="aside"><img src="~/Content/images/Product/@item.Product.Avatar" class="img-sm"></div>
-                                                <figcaption class="info">
-                                                    <a href="#" class="title text-dark">@item.Product.ProductName</a>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <input type="text" value="@item.Quantity" />
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">@item.Product.ProductPrice</var>
-                                            </div> <!-- price-wrap .// -->
-                                        </td>
-                                        <td class="text-right">
-                                            <input type="hidden" value="@item.Product.ProductId" id="ProductId" />
-                                            <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+                            <tr id="Product-@item.Product.ProductId">
+                                <td style="width:200px">
+                                    <figure class="itemside">
+                                        <div class="aside"><img src="~/Content/images/Product/@item.Product.Avatar" class="img-sm"></div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title text-dark">@item.Product.ProductName</a>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <input type="text" value="@item.Quantity" size="10" />
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">$@item.Product.ProductPrice</var>
+                                    </div>
+                                </td>
+                                <td>
 
-                                            <a href="" class="btn btn-light" id="removecart"> Remove</a>
-                                        </td>
-                                    </tr>
+                                    <div class="price-wrap">
+                                        @{
+                                            var sale1 = item.Product.ProductPrice * item.Quantity;
+                                            int cout = Convert.ToInt32(item.Quantity);
+                                            
+                                        }
+                                        
+                                        <var class="price">$@sale1</var>
+                                  
+
+                                      
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <input type="hidden" value="@item.Product.ProductId" id="ProductId" />
+                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+
+                                    <a href="" class="btn btn-light" id="removecart"> Remove</a>
+                                </td>
+                            </tr>
                                 }
                             }
                             else
@@ -82,25 +104,36 @@
                                 <p>Không có sản phẩm trong giỏ hàng</p>
                             }
 
-
+                      
                         </tbody>
                     </table>
 
                     <div class="card-body border-top">
-                        
+                        @if (Convert.ToInt32(Session["Count"]) != 1)
+                        {
+                            <a href="@Url.Action("Index","Home")" class="btn btn-primary float-md-right"> Thanh Toán <i class="fa fa-chevron-right"></i> </a>
+
+
+                        }
+                        else
+                        {
                             <a href="@Url.Action("Index","Payment")" class="btn btn-primary float-md-right"> Thanh Toán <i class="fa fa-chevron-right"></i> </a>
 
-           
+
+                        }
+
+
+
 
                         <a href="@Url.Action("Index","Home")" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp Tục Mua Sắm </a>
                     </div>
-                </div> <!-- card.// -->
+                </div>   
 
                 <div class="alert alert-success mt-3">
                     <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
                 </div>
-
-            </main> <!-- col.// -->
+             
+            </main>  
             <aside class="col-md-3">
                 <div class="card mb-3">
                     <div class="card-body">
@@ -115,13 +148,16 @@
                                 </div>
                             </div>
                         </form>
-                    </div> <!-- card-body.// -->
-                </div>  <!-- card .// -->
+                    </div>  
+                </div> 
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">USD 568</dd>
+                                 
+         <dd class="text-right">ssss</dd>
+                     
+          
                         </dl>
                         <dl class="dlist-align">
                             <dt>Discount:</dt>
@@ -129,17 +165,18 @@
                         </dl>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-right  h5"><strong>$1,650</strong></dd>
+                       
+                       
                         </dl>
                         <hr>
                         <p class="text-center mb-3">
                             <img src="images/misc/payments.png" height="26">
                         </p>
 
-                    </div> <!-- card-body.// -->
-                </div>  <!-- card .// -->
-            </aside> <!-- col.// -->
+                    </div> 
+                </div>   
+            </aside>  
         </div>
 
-    </div> <!-- container .//  -->
+    </div>  
 </section>

@@ -1,0 +1,31 @@
+﻿@model TranTuanKiet_2119110248.Models.HomeModel
+@{
+    ViewBag.Title = "infor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lstUsers.FirstOrDefault().UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lstUsers.FirstOrDefault().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lstUsers.FirstOrDefault().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lstUsers.FirstOrDefault().Sex)
+        </th>
+            
+        <th>
+            Chức Năng
+        </th>
+    </tr>
+
+   
+    }
+
+</table>
+

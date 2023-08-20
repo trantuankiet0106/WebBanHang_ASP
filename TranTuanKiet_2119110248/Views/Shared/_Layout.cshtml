@@ -10,7 +10,7 @@
     <meta name="description" content="Bootstrap e-commerce html template similar to Alibaba">
     <meta name="keywords" content="Online template, shop, theme, template, html, css, bootstrap 4">
 
-    <title>Electronic Device</title>
+    <title>E-Commerce</title>
 
     <link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!--font-->
@@ -32,21 +32,27 @@
     <!-- custom javascript -->
     <script src="~/Content/js/script.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <!--Mystyle-->
+
+    <script src="~/Content/js/MyJs.js"></script>
+    <link href="~/Content/css/mystyle.css" rel="stylesheet" />
+
     <!---->
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
     <b class="screen-overlay"></b>
 
-    
+
 
     <header class="section-header">
         <section class="header-main border-bottom">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-2 col-lg-3 col-md-12">
-                        <a href="@Url.Action("Index","Home")" class="brand-wrap">
-                            <img class="logo" src="~/Content/images/logo.png">
+                        <a href="@Url.Action("Index", "Home")" class="brand-wrap">
+                            <img class="logo" src="https://banner2.cleanpng.com/20180408/uqe/kisspng-logo-e-commerce-electronic-business-ecommerce-5aca8121ed83b3.3986831415232207699729.jpg
+                                 " width="450px" height="450px">
                         </a> <!-- brand-wrap.// -->
                     </div>
                     <div class="col-xl-6 col-lg-5 col-md-6">
@@ -65,39 +71,83 @@
                     </div> <!-- col.// -->
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="widgets-wrap float-md-right">
-                            <div class="widget-header mr-3 widget-view">
+                            <div class="widget-header mr-5 widget-view" >
 
+                                <div class="dropdown">
+                                    <div onclick="myFunction()" class="dropbtn icon-are fa-solid fa-user"></div>
 
-                                @if (Session["idUser"] != null)
-                                {
-                                    if (Session["Admin"] != null)
+                                    @if (Session["idUser"] != null)
                                     {
-                    <li style="list-style:none">
-                        <a href="~/Admin/Home/Index">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>ADMIN
-                        </a>
-                    </li>
-                                        <li style="list-style:none; margin-top:2px;">
-                                            <a href="~/Home/Logout">
-                                                <i class="fa-solid fa-right-from-bracket">
-                                                </i>ĐĂNG XUẤT
-                                            </a>
-                                        </li> }
+                                        <small class="text" style="margin-left:-5px">Tùy chọn</small>
+                                    }
                                     else
                                     {
+                                        <small class="text" style="margin-left:-12px">Chưa đăng nhập</small>
+                                    }
 
-                    <li style="list-style:none; margin-top:2px;">
-                        <a href="~/Home/Logout">
-                            <i class="fa-solid fa-right-from-bracket">
-                            </i>ĐĂNG XUẤT
-                        </a>
-                    </li> }
-            }
-            else
-            {
-                <li style="list-style:none"><a href="~/Home/Register"><i class="fa-solid fa-id-card"></i> ĐĂNG KÝ</a></li>
-                <li style="list-style:none"><a href="@Url.Action("Login", "Home")"><i class="fa-solid fa-right-to-bracket "></i> ĐĂNG NHẬP</a></li>
-                }
+
+
+                                <div id="myDropdown" class="dropdown-content boder">
+                                    @if (Session["idUser"] != null)
+                                    {
+                                        if (Session["Admin"] != null)
+                                        {
+                                            <li style="list-style:none;">
+                                                <a href="~/Admin/Home/Index">
+                                                    <i class="fa-solid fa-screwdriver-wrench"></i>ADMIN
+                                                </a>
+                                            </li>
+                                            <li style="list-style: none; margin-top: 2px;">
+                                                <a href="~/Home/Logout">
+                                                    <i class="fa-solid fa-right-from-bracket">
+                                                    </i>ĐĂNG XUẤT
+                                                </a>
+                                            </li>
+
+                                        }
+                                        else
+                                        {
+                                            <li style="list-style:none; margin-top:2px;">
+                                                <a href="~/Home/Logout" class="size">
+                                                    <i class="fa-solid fa-right-from-bracket">
+                                                    </i>ĐĂNG XUẤT
+                                                </a>
+                                            </li>
+
+
+                                        }
+
+                                    }
+
+                                    else
+                                    {
+                                        <li style="list-style:none"><a href="~/Home/Register" class="size"><i class="fa-solid fa-id-card"></i> ĐĂNG KÝ</a></li>
+
+                                            if (Convert.ToInt32(Session["Count"]) != 1)
+                                        {
+                                            <li style="list-style:none"><a href="@Url.Action("Login", "Home")" class="size"><i class="fa-solid fa-right-to-bracket "></i> ĐĂNG NHẬP</a></li>
+
+                                        }
+                                        else
+                                        {
+                                            <li style="list-style:none"><a href="@Url.Action("Login2", "Home")" class="size"><i class="fa-solid fa-right-to-bracket "></i> ĐĂNG NHẬP</a></li>
+
+                                        }
+
+                                    }
+
+                                </div>
+                                </div>
+
+                                <style>
+                                    .size{
+                                        font-size:12px;
+                                    }
+                                    .boder{
+                                       border-radius:10px;
+                                    }
+                                </style>
+
                             </div>
                             <div class="widget-header mr-3">
                                 <a href="#" class="widget-view">
@@ -116,14 +166,7 @@
                                     <small class="text"> Orders </small>
                                 </a>
                             </div>
-                            <div class="widget-header mr-3">
-                                <a href="#" class="widget-view">
-                                    <div class="icon-area">
-                                        <i class="fa-solid fa-house-user"></i>
-                                    </div>
-                                    <small class="text"> Thông Tin </small>
-                                </a>
-                            </div>
+                          
                             <div class="widget-header">
                                 <a href="@Url.Action("Shoppingcart","Shoppingcart")" class="widget-view">
                                     <div class="icon-area">

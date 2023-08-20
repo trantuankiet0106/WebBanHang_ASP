@@ -6,7 +6,22 @@
 }
 
 <h2>QUẢN LÝ NGƯỜI DÙNG</h2>
+<style>
+    tr {
+        border: 1px solid #428bca;
+    }
 
+    th {
+        text-overflow: clip;
+        text-align: center;
+        border: 2px solid #808080;
+        background-color: #007BFF;
+    }
+
+    td {
+        border: 1px solid #999999;
+    }
+</style>
 
 <table class="table">
     <tr>
@@ -23,7 +38,7 @@
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sex)
+            @Html.DisplayNameFor(model => model.Sex)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Phone)
@@ -61,7 +76,7 @@
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sex)
+            @Html.DisplayFor(modelItem => item.Sex)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone)
@@ -79,7 +94,16 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Admin)
+          @{
+                if (item.Admin == null)
+                {
+                    <p>khách hàng</p>
+                }
+                else
+                {
+                    <p>admin</p>
+                }
+          }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |

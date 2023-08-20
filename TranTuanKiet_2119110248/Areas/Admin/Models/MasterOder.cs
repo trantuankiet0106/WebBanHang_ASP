@@ -8,9 +8,11 @@ namespace TranTuanKiet_2119110248.Models
 {
     public class MasterOder
     {
-        public new List<Order> ListOrder { get; set; }
+        public int id { get; set; }
+        public List<Order> ListOrder { get; set; }
         public new List<OrderDetail> ListOrderDetail { get; set; }
         public new List<User> ListUser { get; set; }
+        public new List<Product> ListPro { get; set; }
         
     }
 }

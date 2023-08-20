@@ -1,27 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 
 using TranTuanKiet_2119110248.Context;
 using TranTuanKiet_2119110248.Models;
+using static TranTuanKiet_2119110248.Common;
 
 namespace TranTuanKiet_2119110248.Areas.Admin.Controllers
 {
     public class OrderManagementController : Controller
     {
-        Webbanhang webbanhang = new Webbanhang();
+       
+             //private DetailOrder  =
+             Webbanhang webbanhang = new Webbanhang();
         // GET: Admin/OrderManagement
       [HttpGet]
-        public ActionResult HOME()
+        
+        public ActionResult Index()
         {
-            MasterOder master = new MasterOder();
-            master.ListOrder = webbanhang.Orders.ToList();
-            master.ListOrderDetail = webbanhang.OrderDetails.ToList();
 
-            return View(master);
+            var lstOr = webbanhang.Orders.ToList();
+            return View(lstOr);
         }
+      
+        public ActionResult Detail(int id)
+        {
+
+            MasterOder chitiet  = new MasterOder();
+          
+
+            var lstDetail = webbanhang.OrderDetails.Where(n => n.OrderId == id).ToList();
+            var lstOrder = webbanhang.Orders.Where(n => n.Id == id).ToList();
+            var lstPro = webbanhang.Products.Where(n => n.ProductId == id).ToList();
+            chitiet.id = id;
+            chitiet.ListOrderDetail = lstDetail;
+            chitiet.ListOrder =lstOrder;
+            chitiet.ListPro =lstPro;
+            return View(chitiet);
+        }
+
     }
 }

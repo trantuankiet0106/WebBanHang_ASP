@@ -1,0 +1,111 @@
+﻿@model TranTuanKiet_2119110248.Models.MasterOder
+@using System.Globalization;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CHI TIẾT ĐƠN HÀNG</h1>
+<style>
+    .boder {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .color {
+        background-color: #007BFF;
+    }
+
+    .font {
+        font-weight: 800;
+    }
+   
+    
+</style>
+</style>
+<div>
+
+    <h3 style="text-align:center">ĐƠN HÀNG : @Model.ListOrder.FirstOrDefault().Name</h3>
+    <h4 style="text-align:justify">TÊN  KHÁCH HÀNG : @Model.ListOrder.FirstOrDefault().UserName</h4>
+    <h4 style="text-align:justify">MÃ ĐƠN HÀNG :@Model.ListOrder.FirstOrDefault().Id</h4>
+    <h4 style="text-align:justify">NGÀY ĐẶT HÀNG :@Model.ListOrder.FirstOrDefault().CreatedOnUtc</h4>
+    <hr />
+    <dl class="dl-horizontal row">
+        <div class="col-md-9">
+            <table width="100%">
+                <thead>
+                    <tr class="boder">
+                        <th colspan="5" class="boder color">Thông Tin Đơn Hàng</th>
+                    </tr>
+                    <tr>
+
+                        <td class="boder font">Tên sản phẩm</td>
+                        <td class="boder font">Ảnh Sản Phẩm</td>
+                        <td class="boder font">Số Lượng</td>
+                        <td class="boder font">Giá Sản Phẩm</td>
+                        <td class="boder font">Thành Tiền</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListOrderDetail)
+                    {
+                        <tr>
+                            <td class="boder">@item.ProductName</td>
+                            <td class="boder"> <img src="~/Content/images/Product/@item.AvataOrder" width="35px" ; /></td>
+                            <td class="boder"> @item.Quantity</td>
+                            <td class="boder"> $@item.prices</td>
+                            <td class="boder"> $@item.price</td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+                <tfoot class="boder" width:100%>
+                    <tr class="align-content-center">
+                        <td class="font" colspan="10">Tổng Giá Trị Đơn hàng : $@Model.ListOrderDetail.Sum(n => n.price)</td>
+                    </tr>
+
+
+                </tfoot>
+
+            </table>
+
+        </div>
+        <div class="col-md-3">
+            <table width="100%" class="boder">
+                <thead>
+                    <tr class="boder">
+                        <th colspan="5" class="boder color">Thông Tin Đơn Hàng</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td colspan="5">➤Tên Khách Hàng :@Model.ListOrder.FirstOrDefault().UserName </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="5">➤Địa chỉ giao hàng : @Model.ListOrder.FirstOrDefault().Diachi</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">➤Email : @Model.ListOrder.FirstOrDefault().Email</td>
+                    </tr>
+
+                <td>➤Số Điện Thoại : @Model.ListOrder.FirstOrDefault().Phone</td>
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+    </dl>
+   <button><a href="@Url.Action("Index", "OrderManagement")"><i class="fa-solid fa-arrow-left"></i>Quay Lại</a></button> 
+</div>
+
+
+
